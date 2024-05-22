@@ -1,26 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <h3 class="text-center">todo app</h3>
+    <hr class="my-2" />
+    <addSection :addNewTodo="addTodo" />
+    <ListSection />
+  </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import addSection from "@/components/addSection.vue";
+import ListSection from "@/components/ListSection.vue";
 export default {
-  name: 'App',
+  data() {
+    return {
+      provideData: {
+        todoList: [
+          { id: 1, text: "merhabalar 1" },
+          { id: 2, text: "merhabalar 2" },
+          { id: 3, text: "merhabalar 3" },
+        ],
+      },
+    };
+  },
+  provide() {
+    return {
+      provideData: this.provideData,
+      deletedTodo: this.deletedTodo,
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    addSection,
+    ListSection,
+  },
+  methods: {
+    deletedTodo(todoItem) {
+      this.provideData.todoList = this.provideData.todoList.filter(
+        (t) => t !== todoItem
+      );
+    },
+    addTodo(todo) {
+      this.provideData.todoList.push({
+        id: new Date().getTime(),
+        text: todo,
+      });
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
