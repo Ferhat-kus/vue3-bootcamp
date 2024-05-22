@@ -17,16 +17,24 @@ const app = Vue.createApp({
   //  },
   methods: {
     addTodo(event) {
-      // this.todoList.push(this.todo);
-      // this.todo = "";
-      // VİDODAKİ YAPIM
       console.log(event.target.value);
-      this.todoList.push(event.target.value);
+      this.todoList.push({
+        id: new Date().getTime(),
+        text: event.target.value,
+        completed: false,
+      });
       event.target.value = "";
     },
-    deleteTodo(id) {
-      const deteledItem = this.todoList.filter((id) => this.todoList[id]);
-      console.log("Silinen Öğe", this.todoList[id]);
+    deleteTodo(todoItem) {
+      this.todoList = this.todoList.filter((item) => item !== todoItem);
+    },
+  },
+  computed: {
+    completedItemCount() {
+      return this.todoList.filter((t) => t.completed).length
+    },
+    uncompletedItemCount() {
+      return this.todoList.filter((t) => !t.completed).length
     },
   },
 }).mount("#app");

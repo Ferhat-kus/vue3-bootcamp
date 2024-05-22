@@ -16,25 +16,51 @@
     <div id="app">
       <div class="container">
         <div class="row">
-          <div class="col-8 offset-2 p-2">
+          <div class="col-5 p-2">
             <h3 class="text-center">Todo List</h3>
             <div class="d-flex">
               <!-- @keypress.enter="todoList.push($event.target.value)" -->
-              <input type="text" @keypress.enter="addTodo" v-model="todo" />
+              <input type="text" @keypress.enter="addTodo" />
             </div>
-            <ul class="list-group">
-              <li
-                class="d-flex justify-content-between list-group-item"
-                v-for="(item,i) in todoList"
-                :key="i"
+            <div v-if="todoList.length > 0">
+              <ul class="list-group">
+                <li
+                  class="d-flex justify-content-between list-group-item"
+                  v-for="(item,i) in todoList"
+                  :key="i"
+                  :class="!item.completed ?'bg-danger' : 'bg-success'"
+                >
+                  <div class="d-flex align-items-center justify-content-center">
+                    <input
+                      type="checkbox"
+                      v-model="item.completed"
+                      :id="item.id"
+                      class="from-check-input"
+                    />
+                    <label :for="item.id" class="from-check-label"
+                      >{{item.text}}</label
+                    >
+                  </div>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    @click="deleteTodo(item)"
+                  >
+                    Sil
+                  </button>
+                </li>
+              </ul>
+              <small class="text-succes"
+                >Completed Todo Count {{completedItemCount}}</small
               >
-                <div class="d-flex align-items-center justify-content-center">
-                  <input type="checkbox" :checked="item.completed" :id="item.id" class="from-check-input" />
-                  <label :for="item.id" class="from-check-label">{{item.text}}</label>
-                </div>
-                <button class="btn btn-danger btn-sm" @click="deleteTodo(item.id)">Sil</button>
-              </li>
-            </ul>
+              <br />
+              <small class="text-danger"
+                >unCompleted Todo Count {{uncompletedItemCount}}</small
+              >
+            </div>
+            <div v-else class="alert alert-warning">Todo no</div>
+          </div>
+          <div class="col-5">
+            <pre>{{todoList}}</pre>
           </div>
         </div>
       </div>
