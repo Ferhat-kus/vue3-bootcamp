@@ -30,9 +30,6 @@ importers:
       '@vue/cli-service':
         specifier: ~5.0.0
         version: 5.0.8(@vue/compiler-sfc@3.4.27)(lodash@4.17.21)(vue@3.4.27)(webpack-sources@3.2.3)
-      eslint:
-        specifier: ^7.32.0
-        version: 7.32.0
       eslint-plugin-vue:
         specifier: ^8.0.3
         version: 8.7.1(eslint@7.32.0)

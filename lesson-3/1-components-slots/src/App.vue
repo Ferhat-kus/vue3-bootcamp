@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <Modal :onSave="onSave" :title="'Merhaba'" :content="'Lorem Lorem Lorem laborumfdasgadgda dfffffffffffffsDGASDGSGSDZ'"/> -->
+  <div>
+    <Modal :onSave="onSave">
+      <template #title> Title </template>
+      <template v-slot:content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. In eius fuga
+        officiis illum quisquam repellatdfs dolore autem quia at ipsam, unde
+        quis magni, voluptate quaerat nisi sed perferendis quidem architecto.
+      </template>
+      <!-- <template #content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. In eius fuga
+        officiis illum quisquam repellat dolore autem quia at ipsam, unde quis
+        magni, voluptate quaerat nisi sed perferendis quidem architecto.
+      </template> -->
+    </Modal>
+  </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Modal from "@/components/ModalModal.vue";
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Modal,
+  },
+  methods: {
+    onSave() {
+      alert("Merhaba");
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
