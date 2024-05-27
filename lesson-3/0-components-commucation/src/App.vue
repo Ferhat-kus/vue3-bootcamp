@@ -1,26 +1,22 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <UserSection />
+  </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import UserSection from "@/components/UserSection.vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { UserSection },
+  data() {
+    return { provideData: { userData: ["Abuzer", "Abuzer1", "Abuzer1"] } };
+  },
+  methods: {
+    newItem(item) {
+      this.provideData.userData.push(item);
+    },
+  },
+  provide() {
+    return { userList: this.provideData.userData, newItem: this.newItem };
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
