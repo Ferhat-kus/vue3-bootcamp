@@ -16,7 +16,10 @@ export default {
     },
   },
   provide() {
-    return { userList: this.provideData.userData, newItem: this.newItem };
+    return {
+      userList: this.provideData.userData,
+      newItem: this.newItem,
+    };
   },
 };
 </script>
