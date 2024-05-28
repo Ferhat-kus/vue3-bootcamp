@@ -18,15 +18,44 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="i in 10" :key="i">
-          <th scope="row">1</th>
-          <td>Vue 3 DOC</td>
-          <td>https//localhost</td>
+        <tr v-for="(item, i) in bookmarks" :key="i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ item.title }}</td>
           <td>
-            <button class="btn btn-sm btn-danger">Sil</button>
+            <a :href="item.url" target="_blank ">{{ item.url }}</a>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" @click="deleteItem(item)">
+              Sil
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      bookmarks: [],
+    };
+  },
+  created() {
+    this.$appAxios.get("/bookmarks").then((get_response) => {
+      this.bookmarks = get_response.data || [];
+    });
+  },
+  methods: {
+    deleteItem(item) {
+      this.$appAxios.delete(`/bookmarks/${item.id}`).then((delete_response) => {
+        console.log(delete_response);
+        if (delete_response.status === 200) {            
+            this.bookmarks = this.bookmarks.filter((i) => i.id !== item.id);
+        }
+      });
+    },
+  },
+};
+</script>
