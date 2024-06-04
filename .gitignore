@@ -1,0 +1,30 @@
+# macOS sistem dosyaları
+.DS_Store
+
+# Node modülleri dizini
+node_modules
+
+# Dağıtım dizini
+/dist
+
+# Yerel ortam dosyaları
+.env.local
+.env.*.local
+
+# Log dosyaları
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editör dizinleri ve dosyaları
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Özel dışlama: node modülleri
+node moduls
