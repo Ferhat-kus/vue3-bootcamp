@@ -1,30 +1,40 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="w-screen h-screen bg-gray-400 pt-10">
+    <div class="bg-gray-700 rounded-md shadow-md text-white w-1/3 p-3 mx-auto">
+      <h3 class="text-center text-2xl">Todo List</h3>
+      <AddSection :AddTodo="AddTodo" />
+      <TodoList @delete-event="deleteItem" :todoList="todoList" />
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script >
+import AddSection from "./components/addSection.vue";
+import TodoList from "./components/todoList.vue";
+import { ref } from "vue";
+export default {
+  components: {
+    AddSection,
+    TodoList,
+  },
+  setup() {
+    const todoList = ref([]);
+    const AddTodo = (todoText) => {
+      console.log(todoText);
+      todoList.value.push({
+        id: new Date().getTime(),
+        title: todoText,
+      });
+    };
+    const deleteItem = (todo) => {
+      console.log(todo);
+      todoList.value = todoList.value.filter((t) => t.id !== todo.id);
+    };
+    return {
+      todoList,
+      AddTodo,
+      deleteItem,
+    };
+  },
+};
+</script>
