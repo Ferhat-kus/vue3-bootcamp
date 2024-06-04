@@ -9,32 +9,34 @@
     corrupti nemo optio similique, voluptates maiores fugiat, adipisci harum
     asperiores, ex molestiae eligendi numquam. Odit aspernatur nesciunt vel non!
   </p>
+  <hr />
+  <button @click="counter++">{{ counter }} {{ oddOrEven }}</button>
+  <hr />
+  <input type="text" v-model="searchText" />
+  <p v-if="isTypeing">Yazıyor...</p>
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import Counter from "./composebles/Counter";
+import Header from "./composebles/Header";
+import Search from "./composebles/Search";
+import Toggle from "./composebles/Toggle";
+
 export default {
-  // data() {
-  //   return {
-  //     title: "Bu bir başlık Abi"
-  //   }
-  // },
   setup() {
-    const title = ref("Merhaba");
-    const show = ref(false);
-    // const titleLenghtMessage = computed(() => {
-    //   return title.value.length + ' adet karkter var'
-    // })
-    const titleLenghtMessage = computed(() => title.value.length + ' adet karkter var')
-    const toggleIt = () => {
-      show.value = !show.value
-    }
-    
+    const { counter, oddOrEven } = Counter();
+    const { title, titleLenghtMessage } = Header();
+    const { searchText, isTypeing, stop } = Search();
+    const { toggleIt, show } = Toggle();
     return {
       title,
       show,
       toggleIt,
       titleLenghtMessage,
+      counter,
+      oddOrEven,
+      searchText,
+      isTypeing,
     };
   },
 };
